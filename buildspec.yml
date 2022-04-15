@@ -1,22 +1,15 @@
 version: 0.2
 
-env:
-  variables:
-   OS: Linux
-   PACKAGE: apach2
-
 phases:
   install:
     commands:
   pre_build:
     commands:
+      - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
   build:
     commands:
-      - cat /etc/os-release
-      - ls -l /boot
-      - free -m
-      - docker version
+      - ls -l .
+      - docker build -t fujikomalan/codebuildapp:latest .
       - docker image ls
-      - docker info
   post_build:
     commands:
