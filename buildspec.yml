@@ -13,5 +13,10 @@ phases:
   build:
     commands:
       - cat /etc/os-release
+      - ls -l /boot
+      - free -m
+      - docker version
+      - docker image ls
+      - docker info
   post_build:
     commands:
