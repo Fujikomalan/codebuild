@@ -3,12 +3,13 @@ version: 0.2
 phases:
     install:
       commands:
-        - whcih docker
+        - cat /etc/os-release
+        - which docker
         - which dockerd
         - netstat -ntlp
         - ls -l /var/run/docker.sock 
         - ls -l .
-        - sleep -h
+        - timeout -h
     pre_build:
       commands:
         - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
