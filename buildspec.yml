@@ -1,0 +1,17 @@
+version: 0.2
+
+env:
+  variables:
+   OS: Linux
+   PACKAGE: apach2
+
+phases:
+  install:
+    commands:
+  pre_build:
+    commands:
+  build:
+    commands:
+      - cat /etc/os-release
+  post_build:
+    commands:
