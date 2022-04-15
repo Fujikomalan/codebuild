@@ -1,20 +1,17 @@
 version: 0.2
 
 phases:
-    install:
-      commands:
-        - cat /etc/os-release
-        - which docker
-        - which dockerd
-        - netstat -ntlp
-        - ls -l /var/run/docker.sock 
-        - ls -l .
-        - timeout -h
-    pre_build:
-      commands:
-        - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
-    build:
-      commands:
-    
-    post_build:
-      commands:
+  install:
+    commands:
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&
+      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+  pre_build:
+    commands:
+      - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
+  build:
+    commands:
+      - ls -l .
+      - docker build -t fujikomalan/codebuildapp:latest .
+      - docker image ls
+  post_build:
+    commands:
