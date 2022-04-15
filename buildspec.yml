@@ -8,8 +8,7 @@ phases:
         - netstat -ntlp
         - ls -l /var/run/docker.sock 
         - ls -l .
-        - docker build -t fujikomalan/codebuildapp:latest .
-        - docker image ls
+        - sleep -h
     pre_build:
       commands:
         - docker login -u="${DOCKER_USER}" -p="${DOCKER_PASSWORD}"
